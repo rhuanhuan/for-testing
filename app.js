@@ -17,13 +17,13 @@ app.get('/*', (req, res) => {
     // const header = req.header("Test-Header");
     // req.get("Okta-Scp");
     // res.status(200).send('you get what you want.' + req.headers["Okta-Scp"] + '------' + req.headers["Okta-Scp"].split(','))
-    if(req.get("Okta-Scp") === 'api,user')
+    if(req.header("Okta-Scp") === 'api,user')
     {
-        res.status(200).send('you get what you want.')
+        res.status(200).send('you get what you want.' + req.header("Okta-Scp"))
     }
     else
     {
-        res.status(401).send('you dont have the access!');
+        res.status(401).send('you dont have the access!' + req.header("Okta-Scp"));
     }
     // const headers = req.headers;
 

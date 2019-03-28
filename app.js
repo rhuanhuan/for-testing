@@ -15,10 +15,11 @@ app.get('/visitor', (req, res) => {
 });
 app.get('/*', (req, res) => {
     // const header = req.header("Test-Header");
-    res.status(200).send('you get what you want.' + req.headers["Okta-Scp"] + '------' + req.headers["Okta-Scp"].split(','))
-    if(req.headers["Okta-Scp"] && req.headers["Okta-Scp"].split(',').includes('user'))
+    // req.get("Okta-Scp");
+    // res.status(200).send('you get what you want.' + req.headers["Okta-Scp"] + '------' + req.headers["Okta-Scp"].split(','))
+    if(req.get("Okta-Scp") === 'api,user')
     {
-        res.status(200).send('you get what you want.' + req.headers["Okta-Scp"].split(','))
+        res.status(200).send('you get what you want.')
     }
     else
     {

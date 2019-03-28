@@ -15,9 +15,10 @@ app.get('/visitor', (req, res) => {
 });
 app.get('/*', (req, res) => {
     // const header = req.header("Test-Header");
+    res.status(200).send('you get what you want.' + req.headers["Okta-Scp"] + '------' + req.headers["Okta-Scp"].split(','))
     if(req.headers["Okta-Scp"] && req.headers["Okta-Scp"].split(',').includes('user'))
     {
-        res.status(200).send('you get what you want.')
+        res.status(200).send('you get what you want.' + req.headers["Okta-Scp"].split(','))
     }
     else
     {

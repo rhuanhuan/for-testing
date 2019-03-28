@@ -15,9 +15,17 @@ app.get('/visitor', (req, res) => {
 });
 app.get('/*', (req, res) => {
     const header = req.header("Test-Header");
+    if(req.header["Okta-Scp"].split(',').contains('user'))
+    {
+        res.status(200).send('you get what you want.')
+    }
+    else
+    {
+        res.status(401).send('you dont have the access!');
+    }
     // const headers = req.headers;
 
-    res.status(404).send(`not found and test header is ${header}`)
+    // res.status(404).send(`not found and test header is ${header}`)
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

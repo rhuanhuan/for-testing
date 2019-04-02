@@ -5,7 +5,7 @@ const port = 3000
 app.get('/', (req, res) => res.send('Hello World! v2'));
 
 app.get('/admin', (req, res) => {
-  req.header("Okta-Scp").includes('admin') ? res.send(`This is admin path`) : res.send('not admin access!')
+  req.header("Okta-Scp") && req.header("Okta-Scp").includes('admin') ? res.send(`This is admin path`) : res.send('not admin access!')
 
 });
 app.get('/user', (req, res) => {

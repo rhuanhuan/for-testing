@@ -16,6 +16,7 @@ app.get('/visitor', (req, res) => {
 });
 app.get('/*', (req, res) => {
     const headers = req.headers;
+    headers.url = req.originalUrl;
 
     res.status(404).send(headers)
 });

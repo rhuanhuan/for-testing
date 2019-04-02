@@ -15,21 +15,9 @@ app.get('/visitor', (req, res) => {
     res.send('This is visitor path')
 });
 app.get('/*', (req, res) => {
-    // console.log('tsetet'.includes('tse'))
-    // const header = req.header("Test-Header");
-    // req.get("Okta-Scp");
-    // res.status(200).send('you get what you want.' + req.headers["Okta-Scp"] + '------' + req.headers["Okta-Scp"].split(','))
-    if(req.header("Okta-Scp").includes('user'))
-    {
-        res.status(200).send('you get what you want.')
-    }
-    else
-    {
-        res.status(401).send('you dont have the access!');
-    }
-    // const headers = req.headers;
+    const headers = req.headers;
 
-    // res.status(404).send(`not found and test header is ${header}`)
+    res.status(404).send(headers)
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -5,13 +5,16 @@ const port = 3000
 app.get('/', (req, res) => res.send('Hello World! v2'));
 
 app.get('/admin', (req, res) => {
-  req.header("Okta-Scp") && req.header("Okta-Scp").includes('forAdmin') ? res.send(`This is admin path`) : res.send('not admin access!')
+  req.header("Okta-Scp") && req.header("Okta-Scp").includes('forAdmin') ? res.send(`This is admin path`) : res.status(403).send('not admin access!')
 });
 app.get('/user', (req, res) => {
     res.send('This is user path')
 });
 app.get('/visitor', (req, res) => {
-    res.send('This is visitor path')
+    req.header("Okta-Scp")
+    && (req.header("Okta-Scp").includes('forVisitor') || req.header("Okta-Scp").includes('forAdmin'))
+        ? res.send(`This is admin path`)
+        : res.status(403).send('not visitor access!')
 });
 app.get('/*', (req, res) => {
     const headers = req.headers;
